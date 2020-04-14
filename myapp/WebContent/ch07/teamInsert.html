@@ -5,40 +5,38 @@
 <title>Team Mgr</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-    function check() {
-      f = document.frm;
-      if (f.name.value == "") {
-        alert("이름 입력하세요.")
-        //function 중간 종료
-        f.name.focus(); 
-        return;
-      } 
-      else if (f.city.value == "") {
-        alert("도시 입력하세요.")
-        //function 중간 종료
-        f.city.focus();
-        return;
-      }
-      else if (f.age.value == "") {
-        alert("나이 입력하세요.")
-        //function 중간 종료
-        f.age.focus();
-        return;
-      }
-      else{
-        alert("팀 입력하세요.")
-        //function 중간 종료
-        f.team.focus();
-        return;
-      }
-
-      f.submit();
-    }
-
-    function check2() {
-
-    }
-  </script>
+	function check() {
+		f=document.frm;
+		if(f.name.value==""){
+			alert("이름 입력하세요.")
+			//function 중간 종료
+			f.name.focus();
+			return;
+		}
+		if(f.city.value==""){
+			alert("사는곳 입력하세요.")
+			f.city.focus();
+			return;
+		}
+		if(f.age.value==""){
+			alert("나이 입력하세요.")
+			f.age.focus();
+			return;
+		}
+		if(f.team.value.length==0){
+			alert("팀 입력하세요.")
+			f.team.focus();
+			return;
+		}
+		
+		f.submit();
+	}
+	
+	function check2() {
+		document.frm.action= "teamInsertProc2.jsp";
+		document.frm.submit();
+	}
+</script>
 </head>
 <body>
 <div align="center">
