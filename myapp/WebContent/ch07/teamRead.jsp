@@ -1,19 +1,23 @@
 <!--teamRead.jsp-->
+<%@page import="ch07.UtilMgr"%>
 <%@page import="ch07.TeamBean"%>
 <%@page contentType="text/html; charset=EUC-KR"%>
 <jsp:useBean id="mgr" class="ch07.TeamMgr"/>
 <%
 		request.setCharacterEncoding("EUC-KR");
 		int num = 0;
+		String url = "teamList.jsp";
+		TeamBean bean = null;
 		if(request.getParameter("num")==null){
-			//정상적으로 num이 요청되지 않으면 지정한 페이지로 응답
-			response.sendRedirect("teamList.jsp");
+			//num값이 넘어 오지 않는다.
+			response.sendRedirect(url);
+		}else if(!UtilMgr.isNumeric(request.getParameter("num"))){
+			//num값이 숫자가 아니다.
+			response.sendRedirect(url);
 		}else{
 			num = Integer.parseInt(request.getParameter("num"));
-		}
-		TeamBean bean = mgr.getTeam(num);
-		//세션에 bean 키값으로 bean 객체를 저장
-		session.setAttribute("bean", bean);
+			bean = mgr.getTeam(num);
+			
 %>
 <!DOCTYPE html>
 <html>
@@ -41,19 +45,20 @@
 	<tr>
 		<td>나이</td>
 		<td><%=bean.getAge()%></td>
-	</tr> 
+	</tr>
 	<tr>
 		<td>팀명</td>
 		<td><%=bean.getTeam()%></td>
 	</tr>
 </table><p/>
-<a href="teamList.jsp">LIST</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="teamPost.jsp">POST</a>&nbsp;&nbsp;
+<a href="teamList.jsp">LIST</a>&nbsp;&nbsp;
+<a href="teamInsert.html">INSERT</a>&nbsp;&nbsp;
+<a href="teamUpdate.jsp?num=<%=num%>">UPDATE</a>&nbsp;&nbsp;
+<a href="teamDelete.jsp?num=<%=num%>">DELETE</a>&nbsp;&nbsp;
 </div>
 </body>
 </html>
-
-
+<%}%>
 
 
 
