@@ -17,7 +17,8 @@
 		}else{
 			num = Integer.parseInt(request.getParameter("num"));
 			bean = mgr.getTeam(num);
-			
+			//bean°´Ã¼¸¦ session ÀúÀå
+			session.setAttribute("bean", bean);
 %>
 <!DOCTYPE html>
 <html>
@@ -54,6 +55,7 @@
 <a href="teamList.jsp">LIST</a>&nbsp;&nbsp;
 <a href="teamInsert.html">INSERT</a>&nbsp;&nbsp;
 <a href="teamUpdate.jsp?num=<%=num%>">UPDATE</a>&nbsp;&nbsp;
+<a href="teamUpdate2.jsp">UPDATE2</a>&nbsp;&nbsp;
 <a href="teamDelete.jsp?num=<%=num%>">DELETE</a>&nbsp;&nbsp;
 </div>
 </body>

@@ -4,11 +4,10 @@
 <%request.setCharacterEncoding("EUC-KR");%>
 <jsp:useBean id="mgr" class="ch07.TeamMgr"/>
 <jsp:useBean id="bean" class="ch07.TeamBean">
-<jsp:setProperty property="*" name="bean"/>
+	<jsp:setProperty property="*" name="bean"/>
 </jsp:useBean>
 <%
 		boolean result = mgr.updateTeam(bean);
-		out.print(result);
 		String msg = "수정실패";
 		String url = "teamList.jsp";
 		if(result){

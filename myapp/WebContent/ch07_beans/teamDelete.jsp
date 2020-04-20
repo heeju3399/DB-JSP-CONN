@@ -1,3 +1,4 @@
+<!-- teamDelete.jsp -->
 <%@page contentType="text/html; charset=EUC-KR"%>
 <jsp:useBean id="mgr" class="ch07.TeamMgr"/>
 <%
