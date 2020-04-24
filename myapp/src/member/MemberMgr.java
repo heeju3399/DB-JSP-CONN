@@ -146,31 +146,27 @@ public class MemberMgr {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
 			if(rs.next()) {
 				bean.setId(rs.getString("id"));
-				bean.setPwd(rs.getString("Pwd"));
-				bean.setName(rs.getString("Name"));
-				bean.setGender(rs.getString("Gender"));
-				bean.setBirthday(rs.getString("Birthday"));
-				bean.setEmail(rs.getString("Email"));
-				bean.setZipcode(rs.getString("Zipcode"));
-				bean.setAddress(rs.getString("Address"));
-				
-				/////
-				String hobby = rs.getString("hobby");
-				//DB에 문자로 저장된 데이터를 배열로 변환,,,,
+				bean.setPwd(rs.getString("pwd"));
+				bean.setName(rs.getString("name"));
+				bean.setGender(rs.getString("gender"));
+				bean.setBirthday(rs.getString("birthday"));
+				bean.setEmail(rs.getString("email"));
+				bean.setZipcode(rs.getString("zipcode"));
+				bean.setAddress(rs.getString("address"));
+				////////////////////////////////////
+				String hobby = rs.getString("hobby");//01010
+				//DB에 문자로 저장된 data를 배열로 변환하여 빈즈에 저장
 				String hobbys[] = new String[hobby.length()];
-				/////
-				for(int i = 0 ; i<hobby.length(); i++) {
+				//01010 -> {"0","1","0","1","0"}
+				for (int i = 0; i < hobbys.length; i++) {
 					hobbys[i] = hobby.substring(i, i+1);
-					
-					
 				}
 				bean.setHobby(hobbys);
+				////////////////////////////////////
 				bean.setJob(rs.getString("job"));
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -187,21 +183,17 @@ public class MemberMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			
-			sql =  " update tblmember "; 
-			sql += " SET id = ?, pwd = ?, NAME = ?, "; 
-			sql += " gender = ?, birthday = ?, email = ?, " ;
-			sql += " zipcode = ?, address = ?, hobby = ?, ";
-			sql += " job = ?  WHERE id = ? ";
+			sql = "update tblMember set pwd=?,name=?,gender=?,"
+					+ " birthday=?,email=?,zipcode=?,address=?,hobby=?"
+					+ " ,job=? where id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bean.getId());
-			pstmt.setString(2, bean.getPwd());
-			pstmt.setString(3, bean.getName());
-			pstmt.setString(4, bean.getGender());
-			pstmt.setString(5, bean.getBirthday());
-			pstmt.setString(6, bean.getEmail());
-			pstmt.setString(7, bean.getZipcode());
-			pstmt.setString(8, bean.getAddress());
+			pstmt.setString(1, bean.getPwd());
+			pstmt.setString(2, bean.getName());
+			pstmt.setString(3, bean.getGender());
+			pstmt.setString(4, bean.getBirthday());
+			pstmt.setString(5, bean.getEmail());
+			pstmt.setString(6, bean.getZipcode());
+			pstmt.setString(7, bean.getAddress());
 			/////////////////////////////////
 			String hobby[] = bean.getHobby();//인터넷 게임 운동
 			String lists[] = {"인터넷", "여행", "게임", "영화", "운동"};
@@ -214,20 +206,20 @@ public class MemberMgr {
 					}
 				}
 			}
-			pstmt.setString(9, new String(hb));//10101
+			pstmt.setString(8, new String(hb));//10101
 			////////////////////////////////
-			pstmt.setString(10, bean.getJob());
-			pstmt.setString(11, bean.getId());
-			
+			pstmt.setString(9, bean.getJob());
+			pstmt.setString(10, bean.getId());
 			if(pstmt.executeUpdate()==1) 
 				flag=true;
 		} catch (Exception e) {
-			System.out.println("update_err :" +e);
+			e.printStackTrace();
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
 		return flag;
 	}
+	
 }
 
 

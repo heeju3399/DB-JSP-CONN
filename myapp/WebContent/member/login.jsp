@@ -38,11 +38,11 @@
 				</tr>
 				<tr>
 					<td>아 이 디</td>
-					<td><input name="id" value="<%=(id!=null)?id:"aaa"%>"></td>
+					<td><input name="id" value="<%=(id!=null)?id:"11"%>"></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" name="pwd" value="1234"></td>
+					<td><input type="password" name="pwd" value="11"></td>
 				</tr>
 				<tr>
 					<td colspan="2">

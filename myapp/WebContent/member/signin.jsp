@@ -6,4 +6,3 @@
 
 <jsp:useBean id="bean" class="member.MemberBean"/>>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>>
-<jsp:useProperty id="*" name="">
